@@ -14,11 +14,11 @@
 
 name: "Build and test"
 on:
-#  pull_request:
-#  workflow_dispatch:
-#  workflow_call:
-#  push:
-#    branches: ["master"]
+  pull_request:
+  workflow_dispatch:
+  workflow_call:
+  push:
+    branches: ["master"]
 
 jobs:
   fetch-ansible-versions:  
@@ -53,6 +53,12 @@ jobs:
     name: Test with Ansible ${{ matrix.ansible-version }}
     needs: [fetch-ansible-versions, build]
     runs-on: ubuntu-latest
+    env:
+      POC_IP: ${{ secrets.POC_IP }}
+      POC_USER: ${{ secrets.POC_USER }}
+      POC_PASS: ${{ secrets.POC_PASS_E }}
+      $POC_TENANT: ${{ secrets.TENANT }}
+      $POC_TENANT_TOKEN: ${{ secrets.TENANT_TOKEN }}
     strategy:
       matrix:
           ansible-version: ${{ fromJson(needs.fetch-ansible-versions.outputs.supported_ansible_versions) }}

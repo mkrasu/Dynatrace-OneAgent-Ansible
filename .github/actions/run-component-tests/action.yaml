@@ -38,7 +38,7 @@ runs:
 
     - name: "Run component tests"
       shell: bash
-      run: sudo bash -c "source venv/bin/activate && pytest roles/oneagent/tests --linux_x86=localhost"
+      run: sudo bash -c "source venv/bin/activate && pytest roles/oneagent/tests --user=$POC_USER --password='$POC_PASS_E' --tenant=$POC_TENANT --tenant_token=$POC_TENANT_TOKEN --windows=$POC_IP"
 
     - name: "Upload logs"
       uses: actions/upload-artifact@v4
