@@ -70,5 +70,12 @@ jobs:
         uses: ./.github/actions/run-sanity-and-linter-tests
       - name: Run component tests
         uses: ./.github/actions/run-component-tests
+        env:
+          POC_IP: ${{ secrets.POC_IP }}
+          POC_USER: ${{ secrets.POC_USER }}
+          POC_PASS: ${{ secrets.POC_PASS }}
+          POC_PASS_E: ${{ secrets.POC_PASS_E }}
+          POC_TENANT: ${{ secrets.POC_TENANT }}
+          POC_TENANT_TOKEN: ${{ secrets.POC_TENANT_TOKEN }}
         with:
           ansible-version: ${{ matrix.ansible-version }}
